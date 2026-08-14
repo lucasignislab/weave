@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 500" fill="none" aria-label="Placeholder para foto de Eitor e Dairo">
+  <!-- Eitor -->
+  <g transform="translate(80, 40)">
+    <!-- Corpo -->
+    <path d="M110 180 C70 180 50 240 50 320 L50 460 L270 460 L270 320 C270 240 250 180 210 180 H110 Z" fill="#0A0A0A" opacity="0.9"/>
+    <!-- Cabeça -->
+    <circle cx="160" cy="100" r="70" fill="#0A0A0A" opacity="0.9"/>
+    <!-- Label -->
+    <rect x="90" y="380" width="140" height="40" rx="20" fill="#FFB800"/>
+    <text x="160" y="406" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="700" fill="#0A0A0A">Eitor</text>
+  </g>
+
+  <!-- Dairo -->
+  <g transform="translate(260, 20)">
+    <!-- Corpo -->
+    <path d="M110 180 C70 180 50 240 50 320 L50 480 L270 480 L270 320 C270 240 250 180 210 180 H110 Z" fill="#FF7E4A" opacity="0.9"/>
+    <!-- Cabeça -->
+    <circle cx="160" cy="100" r="72" fill="#FF7E4A" opacity="0.9"/>
+    <!-- Label -->
+    <rect x="90" y="400" width="140" height="40" rx="20" fill="#FFFFFF"/>
+    <text x="160" y="426" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="18" font-weight="700" fill="#0A0A0A">Dairo</text>
+  </g>
+</svg>
