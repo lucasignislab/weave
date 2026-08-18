@@ -279,11 +279,6 @@ input:-webkit-autofill:focus {
   }
 }
 
-.portrait-layer {
-  opacity: 0;
-  will-change: opacity, filter;
-}
-
 .portrait-spot {
   position: absolute;
   z-index: 0;
@@ -333,46 +328,6 @@ input:-webkit-autofill:focus {
   }
 }
 
-.portrait-layer--shadow {
-  animation:
-    portrait-shadow-reveal 800ms cubic-bezier(0.16, 1, 0.3, 1) 100ms both,
-    portrait-shadow-hide 1000ms cubic-bezier(0.16, 1, 0.3, 1) 1050ms forwards;
-}
-
-.portrait-layer--clear {
-  filter: brightness(0.38) saturate(0.5);
-  animation: portrait-clear-reveal 1500ms cubic-bezier(0.16, 1, 0.3, 1) 800ms both;
-}
-
-@keyframes portrait-shadow-reveal {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes portrait-clear-reveal {
-  from {
-    opacity: 0;
-    filter: brightness(0.38) saturate(0.5);
-  }
-  to {
-    opacity: 1;
-    filter: brightness(1) saturate(1);
-  }
-}
-
-@keyframes portrait-shadow-hide {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
   .floating-platform {
     opacity: 0.92;
@@ -382,14 +337,5 @@ input:-webkit-autofill:focus {
 
   .floating-platform__tile {
     animation: none;
-  }
-
-  .portrait-layer--shadow {
-    animation: none;
-  }
-
-  .portrait-layer--clear {
-    filter: none;
-    animation: portrait-shadow-reveal 300ms ease-out 200ms both;
   }
 }

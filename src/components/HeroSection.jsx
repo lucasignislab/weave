@@ -2,9 +2,7 @@ import LeadForm from "./LeadForm";
 import FloatingPlatforms from "./FloatingPlatforms";
 import LegalFooter from "./LegalFooter";
 import DairoPortrait from "../assets/dairo-profile-cutout-clean.png";
-import DairoSilhouette from "../assets/dairo-silhouette-amber.png";
 import EitorPortrait from "../assets/eitor-profile-cutout-clean.png";
-import EitorSilhouette from "../assets/eitor-silhouette-amber.png";
 import RaadsLogo from "../assets/raads-logo.png";
 
 export default function HeroSection() {
@@ -43,32 +41,16 @@ export default function HeroSection() {
           <div className="portrait-stage relative order-first flex min-h-[26rem] items-end justify-center overflow-visible lg:order-last">
             <div className="portrait-spot" aria-hidden="true" />
             <img
-              src={DairoSilhouette}
-              alt=""
-              aria-hidden="true"
-              className="portrait-layer portrait-layer--shadow portrait-person portrait-person--dairo absolute z-30 object-contain object-bottom-left"
-              decoding="async"
-              fetchPriority="high"
-            />
-            <img
               src={DairoPortrait}
               alt="Dairo Junior de perfil olhando para a esquerda"
-              className="portrait-layer portrait-layer--clear portrait-person portrait-person--dairo absolute z-30 object-contain object-bottom-left"
-              decoding="async"
-              fetchPriority="high"
-            />
-            <img
-              src={EitorSilhouette}
-              alt=""
-              aria-hidden="true"
-              className="portrait-layer portrait-layer--shadow portrait-person portrait-person--eitor absolute z-10 object-contain object-bottom-right"
+              className="portrait-person portrait-person--dairo absolute z-30 object-contain object-bottom-left"
               decoding="async"
               fetchPriority="high"
             />
             <img
               src={EitorPortrait}
               alt="Eitor de perfil olhando para a direita"
-              className="portrait-layer portrait-layer--clear portrait-person portrait-person--eitor absolute z-10 object-contain object-bottom-right"
+              className="portrait-person portrait-person--eitor absolute z-10 object-contain object-bottom-right"
               decoding="async"
               fetchPriority="high"
             />
