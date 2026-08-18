@@ -140,13 +140,13 @@ export default function LeadForm() {
           </>
         ) : (
           <>
-            Quero garantir minha vaga
+            Quero participar das aulas
             <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
           </>
         )}
       </button>
 
-      <p className="text-xs text-center text-gray-500">
+      <p className="text-xs text-center text-gray-400">
         Seus dados estão seguros. Não enviamos spam.
       </p>
     </form>
