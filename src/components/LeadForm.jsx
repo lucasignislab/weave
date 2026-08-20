@@ -1,7 +1,27 @@
-import { useState } from "react";
-import { ArrowRight, Loader2 } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { ArrowRight, Loader2, ChevronDown } from "lucide-react";
 
 const CHECKOUT_URL = "#checkout";
+
+const COUNTRIES = [
+  { code: "BR", name: "Brasil", ddi: "+55", flag: "🇧🇷" },
+  { code: "US", name: "Estados Unidos", ddi: "+1", flag: "🇺🇸" },
+  { code: "PT", name: "Portugal", ddi: "+351", flag: "🇵🇹" },
+  { code: "ES", name: "Espanha", ddi: "+34", flag: "🇪🇸" },
+  { code: "AR", name: "Argentina", ddi: "+54", flag: "🇦🇷" },
+  { code: "MX", name: "México", ddi: "+52", flag: "🇲🇽" },
+  { code: "GB", name: "Reino Unido", ddi: "+44", flag: "🇬🇧" },
+  { code: "CL", name: "Chile", ddi: "+56", flag: "🇨🇱" },
+  { code: "CO", name: "Colômbia", ddi: "+57", flag: "🇨🇴" },
+  { code: "PE", name: "Peru", ddi: "+51", flag: "🇵🇪" },
+  { code: "UY", name: "Uruguai", ddi: "+598", flag: "🇺🇾" },
+  { code: "PY", name: "Paraguai", ddi: "+595", flag: "🇵🇾" },
+  { code: "IT", name: "Itália", ddi: "+39", flag: "🇮🇹" },
+  { code: "DE", name: "Alemanha", ddi: "+49", flag: "🇩🇪" },
+  { code: "FR", name: "França", ddi: "+33", flag: "🇫🇷" },
+  { code: "AU", name: "Austrália", ddi: "+61", flag: "🇦🇺" },
+  { code: "JP", name: "Japão", ddi: "+81", flag: "🇯🇵" },
+];
 
 export default function LeadForm() {
   const [formData, setFormData] = useState({
@@ -9,16 +29,36 @@ export default function LeadForm() {
     email: "",
     telefone: "",
   });
+  const [selectedCountry, setSelectedCountry] = useState(COUNTRIES[0]);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const dropdownRef = useRef(null);
 
-  const formatPhone = (value) => {
-    const digits = value.replace(/\D/g, "").slice(0, 11);
-    if (digits.length <= 2) return digits;
-    if (digits.length <= 7) {
-      return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const formatPhone = (value, countryCode) => {
+    const digits = value.replace(/\D/g, "");
+    if (countryCode === "BR") {
+      const sliced = digits.slice(0, 11);
+      if (sliced.length <= 2) return sliced;
+      if (sliced.length <= 7) {
+        return `(${sliced.slice(0, 2)}) ${sliced.slice(2)}`;
+      }
+      return `(${sliced.slice(0, 2)}) ${sliced.slice(2, 7)}-${sliced.slice(7)}`;
     }
-    return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+    const sliced = digits.slice(0, 14);
+    if (sliced.length <= 3) return sliced;
+    if (sliced.length <= 7) return `${sliced.slice(0, 3)} ${sliced.slice(3)}`;
+    return `${sliced.slice(0, 3)} ${sliced.slice(3, 7)} ${sliced.slice(7)}`;
   };
 
   const validate = () => {
@@ -34,8 +74,9 @@ export default function LeadForm() {
     }
 
     const phoneDigits = formData.telefone.replace(/\D/g, "");
-    if (phoneDigits.length < 10) {
-      nextErrors.telefone = "Digite um telefone válido com DDD";
+    const minDigits = selectedCountry.code === "BR" ? 10 : 7;
+    if (phoneDigits.length < minDigits) {
+      nextErrors.telefone = "Digite um telefone válido";
     }
 
     setErrors(nextErrors);
@@ -46,11 +87,20 @@ export default function LeadForm() {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: name === "telefone" ? formatPhone(value) : value,
+      [name]: name === "telefone" ? formatPhone(value, selectedCountry.code) : value,
     }));
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
+  };
+
+  const handleCountrySelect = (country) => {
+    setSelectedCountry(country);
+    setIsDropdownOpen(false);
+    setFormData((prev) => ({
+      ...prev,
+      telefone: formatPhone(prev.telefone, country.code),
+    }));
   };
 
   const handleSubmit = (e) => {
@@ -59,7 +109,6 @@ export default function LeadForm() {
 
     setIsSubmitting(true);
 
-    // Simula breve processamento antes de redirecionar.
     setTimeout(() => {
       window.location.href = CHECKOUT_URL;
     }, 600);
@@ -107,20 +156,60 @@ export default function LeadForm() {
         )}
       </div>
 
-      <div>
+      <div ref={dropdownRef} className="relative">
         <label htmlFor="telefone" className="sr-only">
           Telefone
         </label>
-        <input
-          id="telefone"
-          name="telefone"
-          type="tel"
-          inputMode="tel"
-          placeholder="WhatsApp com DDD"
-          value={formData.telefone}
-          onChange={handleChange}
-          className={`${inputBase} ${errors.telefone ? "border-red-500" : "border-gray-200"}`}
-        />
+        <div
+          className={`flex items-center bg-gray-50 border rounded-xl transition-all
+            focus-within:ring-2 focus-within:ring-orange-500/20 focus-within:border-orange-500
+            ${errors.telefone ? "border-red-500" : "border-gray-200"}`}
+        >
+          <button
+            type="button"
+            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            className="flex items-center gap-1.5 px-3 py-3 text-gray-700 text-sm shrink-0
+              hover:bg-gray-100 rounded-l-xl transition-colors focus:outline-none border-r border-gray-200"
+            title="Selecionar país"
+          >
+            <span className="text-base leading-none">{selectedCountry.flag}</span>
+            <span className="font-semibold text-xs">{selectedCountry.ddi}</span>
+            <ChevronDown className={`w-3.5 h-3.5 text-gray-400 transition-transform duration-200 ${isDropdownOpen ? "rotate-180" : ""}`} />
+          </button>
+
+          <input
+            id="telefone"
+            name="telefone"
+            type="tel"
+            inputMode="tel"
+            placeholder={selectedCountry.code === "BR" ? "WhatsApp com DDD" : "Número de telefone"}
+            value={formData.telefone}
+            onChange={handleChange}
+            className="flex-1 bg-transparent px-3 py-3 text-gray-900 placeholder:text-gray-400 focus:outline-none text-sm rounded-r-xl"
+          />
+        </div>
+
+        {isDropdownOpen && (
+          <div className="absolute top-full left-0 mt-1.5 w-64 bg-white border border-gray-200 rounded-xl shadow-2xl z-50 max-h-60 overflow-y-auto py-1 text-left">
+            {COUNTRIES.map((country) => (
+              <button
+                key={country.code}
+                type="button"
+                onClick={() => handleCountrySelect(country)}
+                className={`w-full flex items-center justify-between px-3.5 py-2.5 text-sm hover:bg-orange-50 transition-colors ${
+                  selectedCountry.code === country.code ? "bg-orange-50/70 font-semibold text-orange-600" : "text-gray-700"
+                }`}
+              >
+                <div className="flex items-center gap-2.5">
+                  <span className="text-base leading-none">{country.flag}</span>
+                  <span className="text-gray-800">{country.name}</span>
+                </div>
+                <span className="text-xs font-semibold text-gray-500">{country.ddi}</span>
+              </button>
+            ))}
+          </div>
+        )}
+
         {errors.telefone && (
           <p className="mt-1 text-sm text-red-500">{errors.telefone}</p>
         )}
