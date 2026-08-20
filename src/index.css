@@ -128,17 +128,19 @@ input:-webkit-autofill:focus {
 
 .floating-platform__tile {
   display: grid;
-  width: 4.25rem;
-  height: 4.25rem;
+  width: 6.375rem;
+  height: 6.375rem;
   place-items: center;
-  padding: 0.8rem;
-  border: 1px solid rgb(255 255 255 / 10%);
-  border-radius: 0.9rem;
-  background: rgb(24 24 24 / 88%);
+  padding: 1.2rem;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 1.35rem;
+  background: rgba(240, 242, 245, 0.72);
   box-shadow:
-    0 1.25rem 3rem rgb(0 0 0 / 45%),
-    inset 0 1px 0 rgb(255 255 255 / 7%);
-  backdrop-filter: blur(0.75rem);
+    0 1.25rem 3rem rgba(0, 0, 0, 0.35),
+    inset 0 1px 1px rgba(255, 255, 255, 0.8),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
   animation: platform-card-drift 4.8s ease-in-out var(--float-delay) infinite alternate;
   will-change: transform, box-shadow;
 }
@@ -162,6 +164,18 @@ input:-webkit-autofill:focus {
   --rotate-to: 4deg;
 }
 
+.floating-platform--tiktok {
+  top: 4%;
+  right: 20%;
+  --arrival-delay: 160ms;
+  --float-delay: -3.5s;
+  --float-duration: 10s;
+  --float-x: 0.9rem;
+  --float-y: -0.8rem;
+  --rotate-from: -6deg;
+  --rotate-to: 5deg;
+}
+
 .floating-platform--google {
   top: 22%;
   right: 3.5%;
@@ -175,8 +189,8 @@ input:-webkit-autofill:focus {
 }
 
 .floating-platform--taboola {
-  bottom: 7%;
-  left: 43%;
+  right: 3%;
+  bottom: 8%;
   --arrival-delay: 340ms;
   --float-delay: -7s;
   --float-duration: 10s;
@@ -187,8 +201,8 @@ input:-webkit-autofill:focus {
 }
 
 .floating-platform--newsbreak {
-  right: 3%;
-  bottom: 8%;
+  bottom: 7%;
+  left: 43%;
   --arrival-delay: 460ms;
   --float-delay: -3.5s;
   --float-duration: 12s;
@@ -209,6 +223,11 @@ input:-webkit-autofill:focus {
     left: 1rem;
   }
 
+  .floating-platform--tiktok {
+    top: 2.5rem;
+    right: 1.5rem;
+  }
+
   .floating-platform--google {
     top: 7.5rem;
     right: 1rem;
@@ -217,31 +236,33 @@ input:-webkit-autofill:focus {
   .floating-platform--taboola {
     top: 23rem;
     bottom: auto;
-    left: 1rem;
+    right: 1rem;
+    left: auto;
   }
 
   .floating-platform--newsbreak {
     top: 23rem;
-    right: 1rem;
     bottom: auto;
+    left: 1rem;
+    right: auto;
   }
 
   .floating-platform__tile {
-    width: 3.75rem;
-    height: 3.75rem;
-    padding: 0.7rem;
+    width: 5.625rem;
+    height: 5.625rem;
+    padding: 1.05rem;
   }
 
   .floating-platform--taboola .floating-platform__tile,
   .floating-platform--newsbreak .floating-platform__tile {
-    width: 6.5rem;
+    width: 9.75rem;
   }
 }
 
 .floating-platform--taboola .floating-platform__tile,
 .floating-platform--newsbreak .floating-platform__tile {
-  width: 7.5rem;
-  padding-inline: 1rem;
+  width: 11.25rem;
+  padding-inline: 1.5rem;
 }
 
 @keyframes platform-arrival {
@@ -268,14 +289,16 @@ input:-webkit-autofill:focus {
   from {
     transform: translateY(-0.2rem) scale(0.99);
     box-shadow:
-      0 1rem 2.5rem rgb(0 0 0 / 38%),
-      inset 0 1px 0 rgb(255 255 255 / 7%);
+      0 1rem 2.5rem rgba(0, 0, 0, 0.3),
+      inset 0 1px 1px rgba(255, 255, 255, 0.8),
+      inset 0 -1px 1px rgba(0, 0, 0, 0.05);
   }
   to {
     transform: translateY(0.25rem) scale(1.01);
     box-shadow:
-      0 1.5rem 3.25rem rgb(0 0 0 / 52%),
-      inset 0 1px 0 rgb(255 255 255 / 9%);
+      0 1.5rem 3.25rem rgba(0, 0, 0, 0.45),
+      inset 0 1px 1px rgba(255, 255, 255, 0.9),
+      inset 0 -1px 1px rgba(0, 0, 0, 0.08);
   }
 }
 
