@@ -1,8 +1,7 @@
 import LeadForm from "./LeadForm";
 import FloatingPlatforms from "./FloatingPlatforms";
 import LegalFooter from "./LegalFooter";
-import DairoPortrait from "../assets/dairo-profile-cutout-clean.png";
-import EitorPortrait from "../assets/eitor-profile-cutout-clean.png";
+import PartnershipPortrait from "../assets/dairo-eitor-handshake.png";
 import RaadsLogo from "../assets/raads-logo.png";
 
 export default function HeroSection() {
@@ -41,16 +40,9 @@ export default function HeroSection() {
           <div className="portrait-stage relative order-first flex min-h-[26rem] items-end justify-center overflow-visible lg:order-last">
             <div className="portrait-spot" aria-hidden="true" />
             <img
-              src={DairoPortrait}
-              alt="Dairo Junior de perfil olhando para a esquerda"
-              className="portrait-person portrait-person--dairo absolute z-30 object-contain object-bottom-left"
-              decoding="async"
-              fetchPriority="high"
-            />
-            <img
-              src={EitorPortrait}
-              alt="Eitor de perfil olhando para a direita"
-              className="portrait-person portrait-person--eitor absolute z-10 object-contain object-bottom-right"
+              src={PartnershipPortrait}
+              alt="Eitor e Dairo Junior sorrindo e cumprimentando-se"
+              className="portrait-partnership absolute inset-x-0 bottom-0 z-20 object-contain object-bottom"
               decoding="async"
               fetchPriority="high"
             />
