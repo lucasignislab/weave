@@ -37,12 +37,12 @@ export default function HeroSection() {
             <LegalFooter />
           </div>
 
-          <div className="portrait-stage relative order-first flex min-h-[26rem] items-end justify-center overflow-visible lg:order-last">
+          <div className="portrait-stage relative order-first flex min-h-[26rem] items-start justify-center overflow-hidden lg:order-last">
             <div className="portrait-spot" aria-hidden="true" />
             <img
               src={PartnershipPortrait}
               alt="Eitor e Dairo Junior sorrindo e cumprimentando-se"
-              className="portrait-partnership absolute inset-x-0 bottom-0 z-20 object-contain object-bottom"
+              className="portrait-partnership absolute z-20 object-contain object-top"
               decoding="async"
               fetchPriority="high"
             />
