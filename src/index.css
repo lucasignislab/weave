@@ -112,7 +112,7 @@ input:-webkit-autofill:focus {
 .floating-platforms {
   position: absolute;
   inset: 0;
-  z-index: 20;
+  z-index: 5;
   overflow: hidden;
   pointer-events: none;
 }
@@ -218,44 +218,45 @@ input:-webkit-autofill:focus {
     width: 8.5rem;
   }
 
+  .floating-platform {
+    top: 30rem;
+    right: auto;
+    bottom: auto;
+    --float-x: 0.2rem;
+    --float-y: 0.25rem;
+  }
+
   .floating-platform--meta {
-    top: 7.5rem;
-    left: 1rem;
+    left: 4%;
   }
 
   .floating-platform--tiktok {
-    top: 2.5rem;
-    right: 1.5rem;
+    left: 20%;
   }
 
   .floating-platform--google {
-    top: 7.5rem;
-    right: 1rem;
+    left: 36%;
   }
 
   .floating-platform--taboola {
-    top: 23rem;
-    bottom: auto;
-    right: 1rem;
+    right: 4%;
     left: auto;
   }
 
   .floating-platform--newsbreak {
-    top: 23rem;
-    bottom: auto;
-    left: 1rem;
-    right: auto;
+    left: 52%;
   }
 
   .floating-platform__tile {
-    width: 5.625rem;
-    height: 5.625rem;
-    padding: 1.05rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0.55rem;
   }
 
   .floating-platform--taboola .floating-platform__tile,
   .floating-platform--newsbreak .floating-platform__tile {
-    width: 9.75rem;
+    width: 4rem;
+    padding-inline: 0.65rem;
   }
 }
 
@@ -311,14 +312,69 @@ input:-webkit-autofill:focus {
 }
 
 @media (min-width: 1024px) {
+  .floating-platform {
+    right: auto;
+    bottom: auto;
+    top: 1rem;
+    --float-x: 0.25rem;
+    --float-y: 0.35rem;
+  }
+
+  .floating-platform--meta {
+    left: 47%;
+  }
+
+  .floating-platform--tiktok {
+    left: 56%;
+  }
+
+  .floating-platform--google {
+    left: 65%;
+  }
+
+  .floating-platform--newsbreak {
+    left: 74%;
+  }
+
+  .floating-platform--taboola {
+    right: 2%;
+    left: auto;
+  }
+
+  .floating-platform__tile {
+    width: 4.5rem;
+    height: 4.5rem;
+    padding: 0.85rem;
+  }
+
+  .floating-platform--taboola .floating-platform__tile,
+  .floating-platform--newsbreak .floating-platform__tile {
+    width: 7rem;
+    padding-inline: 1rem;
+  }
+
   .portrait-stage {
     min-height: 100svh;
+    overflow: visible;
   }
 
   .portrait-partnership {
+    top: 1.5rem;
     left: -45%;
     width: 190%;
     height: 190%;
+  }
+}
+
+@media (max-width: 1023px) {
+  .hero-copy {
+    margin-top: 2rem;
+  }
+
+  .floating-platform--taboola .floating-platform__tile,
+  .floating-platform--newsbreak .floating-platform__tile {
+    width: 4rem;
+    padding-inline: 0.65rem;
   }
 }
 
