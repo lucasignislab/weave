@@ -302,21 +302,6 @@ input:-webkit-autofill:focus {
   }
 }
 
-.portrait-spot {
-  position: absolute;
-  z-index: 0;
-  bottom: 8%;
-  left: 50%;
-  width: 82%;
-  height: 68%;
-  border-radius: 50%;
-  background: #ffb800;
-  opacity: 0.25;
-  filter: blur(5rem);
-  transform: translateX(-50%);
-  pointer-events: none;
-}
-
 .portrait-partnership {
   top: 0;
   left: -12.5%;
@@ -330,6 +315,11 @@ input:-webkit-autofill:focus {
     min-height: 100svh;
   }
 
+  .portrait-partnership {
+    left: -45%;
+    width: 190%;
+    height: 190%;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

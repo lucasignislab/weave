@@ -38,7 +38,6 @@ export default function HeroSection() {
           </div>
 
           <div className="portrait-stage relative order-first flex min-h-[26rem] items-start justify-center overflow-hidden lg:order-last">
-            <div className="portrait-spot" aria-hidden="true" />
             <img
               src={PartnershipPortrait}
               alt="Eitor e Dairo Junior sorrindo e cumprimentando-se"
