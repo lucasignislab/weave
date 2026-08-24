@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { ArrowRight, Loader2, ChevronDown } from "lucide-react";
+import { isPlausiblePhoneNumber, normalizePhoneInput } from "../lib/phone";
 
 const CHECKOUT_URL = "#checkout";
 
@@ -45,22 +46,6 @@ export default function LeadForm() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const formatPhone = (value, countryCode) => {
-    const digits = value.replace(/\D/g, "");
-    if (countryCode === "BR") {
-      const sliced = digits.slice(0, 11);
-      if (sliced.length <= 2) return sliced;
-      if (sliced.length <= 7) {
-        return `(${sliced.slice(0, 2)}) ${sliced.slice(2)}`;
-      }
-      return `(${sliced.slice(0, 2)}) ${sliced.slice(2, 7)}-${sliced.slice(7)}`;
-    }
-    const sliced = digits.slice(0, 14);
-    if (sliced.length <= 3) return sliced;
-    if (sliced.length <= 7) return `${sliced.slice(0, 3)} ${sliced.slice(3)}`;
-    return `${sliced.slice(0, 3)} ${sliced.slice(3, 7)} ${sliced.slice(7)}`;
-  };
-
   const validate = () => {
     const nextErrors = {};
 
@@ -73,10 +58,8 @@ export default function LeadForm() {
       nextErrors.email = "Digite um e-mail válido";
     }
 
-    const phoneDigits = formData.telefone.replace(/\D/g, "");
-    const minDigits = selectedCountry.code === "BR" ? 10 : 7;
-    if (phoneDigits.length < minDigits) {
-      nextErrors.telefone = "Digite um telefone válido";
+    if (!isPlausiblePhoneNumber(formData.telefone)) {
+      nextErrors.telefone = "Digite o número de telefone com o código local";
     }
 
     setErrors(nextErrors);
@@ -87,7 +70,7 @@ export default function LeadForm() {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: name === "telefone" ? formatPhone(value, selectedCountry.code) : value,
+      [name]: name === "telefone" ? normalizePhoneInput(value) : value,
     }));
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
@@ -97,10 +80,7 @@ export default function LeadForm() {
   const handleCountrySelect = (country) => {
     setSelectedCountry(country);
     setIsDropdownOpen(false);
-    setFormData((prev) => ({
-      ...prev,
-      telefone: formatPhone(prev.telefone, country.code),
-    }));
+    setErrors((prev) => ({ ...prev, telefone: undefined }));
   };
 
   const handleSubmit = (e) => {
@@ -131,10 +111,12 @@ export default function LeadForm() {
           placeholder="Nome completo"
           value={formData.nome}
           onChange={handleChange}
+          aria-invalid={Boolean(errors.nome)}
+          aria-describedby={errors.nome ? "nome-error" : undefined}
           className={`${inputBase} ${errors.nome ? "border-red-500" : "border-gray-200"}`}
         />
         {errors.nome && (
-          <p className="mt-1 text-sm text-red-500">{errors.nome}</p>
+          <p id="nome-error" className="mt-1 text-sm text-red-500">{errors.nome}</p>
         )}
       </div>
 
@@ -149,10 +131,12 @@ export default function LeadForm() {
           placeholder="Seu melhor e-mail"
           value={formData.email}
           onChange={handleChange}
+          aria-invalid={Boolean(errors.email)}
+          aria-describedby={errors.email ? "email-error" : undefined}
           className={`${inputBase} ${errors.email ? "border-red-500" : "border-gray-200"}`}
         />
         {errors.email && (
-          <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+          <p id="email-error" className="mt-1 text-sm text-red-500">{errors.email}</p>
         )}
       </div>
 
@@ -168,6 +152,9 @@ export default function LeadForm() {
           <button
             type="button"
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            aria-label={`Selecionar país. Atual: ${selectedCountry.name} ${selectedCountry.ddi}`}
+            aria-expanded={isDropdownOpen}
+            aria-controls="country-options"
             className="flex items-center gap-1.5 px-3 py-3 text-gray-700 text-sm shrink-0
               hover:bg-gray-100 rounded-l-xl transition-colors focus:outline-none border-r border-gray-200"
             title="Selecionar país"
@@ -185,19 +172,22 @@ export default function LeadForm() {
             placeholder={selectedCountry.code === "BR" ? "WhatsApp com DDD" : "Número de telefone"}
             value={formData.telefone}
             onChange={handleChange}
+            autoComplete="tel-national"
+            aria-invalid={Boolean(errors.telefone)}
+            aria-describedby={errors.telefone ? "telefone-error" : undefined}
             className="flex-1 bg-transparent px-3 py-3 text-gray-900 placeholder:text-gray-400 focus:outline-none text-sm rounded-r-xl"
           />
         </div>
 
         {isDropdownOpen && (
-          <div className="absolute top-full left-0 mt-1.5 w-64 bg-white border border-gray-200 rounded-xl shadow-2xl z-50 max-h-60 overflow-y-auto py-1 text-left">
+          <div id="country-options" className="absolute top-full left-0 mt-1.5 w-64 bg-white border border-gray-200 rounded-xl shadow-2xl z-50 max-h-60 overflow-y-auto py-1 text-left">
             {COUNTRIES.map((country) => (
               <button
                 key={country.code}
                 type="button"
                 onClick={() => handleCountrySelect(country)}
-                className={`w-full flex items-center justify-between px-3.5 py-2.5 text-sm hover:bg-orange-50 transition-colors ${
-                  selectedCountry.code === country.code ? "bg-orange-50/70 font-semibold text-orange-600" : "text-gray-700"
+                className={`w-full flex items-center justify-between px-3.5 py-2.5 text-sm hover:bg-[#fff7e6] transition-colors ${
+                  selectedCountry.code === country.code ? "bg-[#fff7e6] font-semibold text-[#8a5600]" : "text-gray-900"
                 }`}
               >
                 <div className="flex items-center gap-2.5">
@@ -211,7 +201,7 @@ export default function LeadForm() {
         )}
 
         {errors.telefone && (
-          <p className="mt-1 text-sm text-red-500">{errors.telefone}</p>
+          <p id="telefone-error" className="mt-1 text-sm text-red-500">{errors.telefone}</p>
         )}
       </div>
 
