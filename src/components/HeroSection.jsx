@@ -15,10 +15,9 @@ export default function HeroSection() {
         decoding="async"
         fetchPriority="high"
       />
-      <FloatingPlatforms />
       <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl items-center px-4 pb-16 pt-24 sm:px-6 lg:px-8 lg:py-0">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center w-full">
-          <div className="hero-copy flex flex-col items-start text-left">
+        <div className="grid w-full grid-cols-1 gap-12 lg:min-h-screen lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-x-16 lg:gap-y-12">
+          <div className="hero-copy flex flex-col items-start text-left lg:col-start-1 lg:row-start-1">
             <h1 className="text-[2rem] font-black leading-[1.1] tracking-[-0.02em] text-white sm:text-5xl lg:text-[3rem] lg:leading-[1.15]">
               A <span className="text-brand-gold">parceria</span> que{" "}
               <span className="text-brand-gold">multiplica</span> seus{" "}
@@ -31,13 +30,10 @@ export default function HeroSection() {
               para garantir sua vaga.
             </p>
 
-            <div className="mt-6 w-full sm:mt-8">
-              <LeadForm />
-            </div>
-            <LegalFooter />
           </div>
 
-          <div className="portrait-stage relative order-last flex min-h-[26rem] items-start justify-center overflow-hidden">
+          <div className="portrait-stage relative flex min-h-[26rem] items-start justify-center overflow-hidden lg:col-start-2 lg:row-span-2 lg:row-start-1">
+            <FloatingPlatforms />
             <img
               src={PartnershipPortrait927}
               srcSet={`${PartnershipPortrait480} 480w, ${PartnershipPortrait927} 927w`}
@@ -49,6 +45,11 @@ export default function HeroSection() {
               decoding="async"
               fetchPriority="high"
             />
+          </div>
+
+          <div className="hero-conversion w-full lg:col-start-1 lg:row-start-2">
+            <LeadForm />
+            <LegalFooter />
           </div>
         </div>
       </div>

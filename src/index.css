@@ -230,14 +230,14 @@ input:-webkit-autofill:focus {
 
   .floating-platform--meta {
     top: 1rem;
-    right: 7rem;
-    left: auto;
+    right: auto;
+    left: 1rem;
   }
 
   .floating-platform--tiktok {
     top: 1rem;
-    right: 4rem;
-    left: auto;
+    right: auto;
+    left: calc(50% - 1.25rem);
   }
 
   .floating-platform--google {
@@ -247,15 +247,15 @@ input:-webkit-autofill:focus {
   }
 
   .floating-platform--taboola {
-    top: auto;
-    bottom: 12rem;
+    top: 13.5rem;
+    bottom: auto;
     right: 0.75rem;
     left: auto;
   }
 
   .floating-platform--newsbreak {
-    top: auto;
-    bottom: 12rem;
+    top: 13.5rem;
+    bottom: auto;
     left: 0.75rem;
     right: auto;
   }
@@ -318,22 +318,23 @@ input:-webkit-autofill:focus {
 
   .floating-platform--meta {
     top: 1rem;
-    left: 48%;
+    left: 0;
   }
 
   .floating-platform--tiktok {
     top: 1rem;
-    left: 61%;
+    left: calc(50% - 2.25rem);
   }
 
   .floating-platform--google {
     top: 1rem;
-    left: 74%;
+    right: 0;
+    left: auto;
   }
 
   .floating-platform--newsbreak {
     top: clamp(32rem, 78vh, 48rem);
-    left: 47%;
+    left: 0;
   }
 
   .floating-platform--taboola {
