@@ -307,6 +307,22 @@ input:-webkit-autofill:focus {
   max-width: none;
 }
 
+.portrait-stage::after {
+  position: absolute;
+  z-index: 22;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: clamp(5rem, 22%, 7rem);
+  background: linear-gradient(
+    to bottom,
+    rgb(33 33 33 / 0),
+    var(--color-surface-dark) 92%
+  );
+  content: "";
+  pointer-events: none;
+}
+
 @media (min-width: 1024px) {
   .floating-platform {
     right: auto;
