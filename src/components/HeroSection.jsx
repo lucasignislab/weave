@@ -17,7 +17,7 @@ export default function HeroSection() {
       />
       <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl items-center px-4 pb-16 pt-24 sm:px-6 lg:px-8 lg:py-0">
         <div className="grid w-full grid-cols-1 gap-12 lg:min-h-screen lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-x-16 lg:gap-y-12">
-          <div className="hero-copy flex flex-col items-start text-left lg:col-start-1 lg:row-start-1">
+          <div className="hero-copy flex flex-col items-center text-center lg:col-start-1 lg:row-start-1 lg:items-start lg:text-left">
             <h1 className="text-[2rem] font-black leading-[1.1] tracking-[-0.02em] text-white sm:text-5xl lg:text-[3rem] lg:leading-[1.15]">
               A <span className="text-brand-gold">parceria</span> que{" "}
               <span className="text-brand-gold">multiplica</span> seus{" "}

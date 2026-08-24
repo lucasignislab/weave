@@ -1,6 +1,6 @@
 export default function LegalFooter() {
   return (
-    <footer className="mt-5 flex w-full max-w-md flex-col gap-4 border-t border-white/10 pt-5 text-[0.8125rem] leading-relaxed text-text-subtle-on-dark sm:flex-row sm:items-start sm:justify-between">
+    <footer className="mt-5 flex w-full max-w-md flex-col items-center gap-4 border-t border-white/10 pt-5 text-center text-[0.8125rem] leading-relaxed text-text-subtle-on-dark lg:flex-row lg:items-start lg:justify-between lg:text-left">
       <div className="max-w-[17rem]">
         <p className="font-semibold text-text-on-dark">
           Ratoeira Ads — CNPJ: 55.824.986/0001-06
@@ -12,7 +12,7 @@ export default function LegalFooter() {
       </div>
 
       <nav
-        className="flex shrink-0 flex-col items-start"
+        className="flex shrink-0 flex-col items-center lg:items-start"
         aria-label="Links legais"
       >
         <a
