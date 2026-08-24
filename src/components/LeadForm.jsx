@@ -4,6 +4,7 @@ import { isPlausiblePhoneNumber, normalizePhoneInput } from "../lib/phone";
 
 const CHECKOUT_URL =
   "https://chat.whatsapp.com/BQCxIjwb3I0IjGvTOPmBuz?src=vSt108737e4d4df454d87501c1e2947f084&sck=vSt108737e4d4df454d87501c1e2947f084&utm_medium=vSt108737e4d4df454d87501c1e2947f084&utm_campaign=vSt108737e4d4df454d87501c1e2947f084&utm_content=vSt108737e4d4df454d87501c1e2947f084";
+const WEBHOOK_URL = import.meta.env.VITE_WEBHOOK_URL;
 
 const COUNTRIES = [
   { code: "BR", name: "Brasil", ddi: "+55", flag: "🇧🇷" },
@@ -35,6 +36,7 @@ export default function LeadForm() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submissionError, setSubmissionError] = useState("");
   const dropdownRef = useRef(null);
   const fieldRefs = useRef({});
 
@@ -91,15 +93,43 @@ export default function LeadForm() {
     setErrors((prev) => ({ ...prev, telefone: undefined }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate()) return;
 
     setIsSubmitting(true);
+    setSubmissionError("");
 
-    setTimeout(() => {
-      window.location.href = CHECKOUT_URL;
-    }, 600);
+    const phoneDigits = formData.telefone.replace(/\D/g, "");
+    const payload = {
+      nome: formData.nome.trim(),
+      email: formData.email.trim().toLowerCase(),
+      telefone: `${selectedCountry.ddi}${phoneDigits}`,
+      pais: selectedCountry.name,
+      codigoPais: selectedCountry.code,
+      ddi: selectedCountry.ddi,
+    };
+
+    try {
+      const response = await fetch(WEBHOOK_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Webhook respondeu com status ${response.status}`);
+      }
+
+      window.location.assign(CHECKOUT_URL);
+    } catch {
+      setSubmissionError(
+        "Não foi possível enviar seus dados. Tente novamente em instantes.",
+      );
+      setIsSubmitting(false);
+    }
   };
 
   const inputBase =
@@ -249,6 +279,12 @@ export default function LeadForm() {
           </>
         )}
       </button>
+
+      {submissionError && (
+        <p role="alert" className="text-center text-sm text-error-on-dark">
+          {submissionError}
+        </p>
+      )}
 
       <p className="text-center text-xs text-gray-400">
         Seus dados estão seguros. Não enviamos spam.
