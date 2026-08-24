@@ -1,7 +1,7 @@
 import GoogleAdsLogo from "../assets/platforms/google-ads.svg";
 import MetaAdsLogo from "../assets/platforms/meta.svg";
 import NewsBreakLogo from "../assets/platforms/newsbreak.png";
-import TaboolaLogo from "../assets/platforms/taboola.png";
+import TaboolaLogo from "../assets/platforms/taboola.webp";
 import TikTokLogo from "../assets/platforms/tiktok.svg";
 
 const platforms = [

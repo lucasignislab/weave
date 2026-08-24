@@ -35,6 +35,7 @@ export default function LeadForm() {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const dropdownRef = useRef(null);
+  const fieldRefs = useRef({});
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -63,6 +64,12 @@ export default function LeadForm() {
     }
 
     setErrors(nextErrors);
+    const firstInvalidField = ["nome", "email", "telefone"].find(
+      (field) => nextErrors[field],
+    );
+    if (firstInvalidField) {
+      requestAnimationFrame(() => fieldRefs.current[firstInvalidField]?.focus());
+    }
     return Object.keys(nextErrors).length === 0;
   };
 
@@ -95,28 +102,35 @@ export default function LeadForm() {
   };
 
   const inputBase =
-    "w-full bg-gray-50 border rounded-xl px-4 py-3 text-gray-900 placeholder:text-gray-400 " +
-    "focus:outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all";
+    "min-h-12 w-full rounded-xl border bg-surface-input px-4 py-3 text-base text-text-primary placeholder:text-text-secondary " +
+    "transition-all focus:border-brand-gold focus:outline-none focus:ring-2 focus:ring-brand-gold/30";
 
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-md space-y-4">
+    <form noValidate onSubmit={handleSubmit} className="w-full max-w-md space-y-4">
       <div>
         <label htmlFor="nome" className="sr-only">
           Nome completo
         </label>
         <input
           id="nome"
+          ref={(node) => {
+            fieldRefs.current.nome = node;
+          }}
           name="nome"
           type="text"
+          autoComplete="name"
+          required
           placeholder="Nome completo"
           value={formData.nome}
           onChange={handleChange}
           aria-invalid={Boolean(errors.nome)}
           aria-describedby={errors.nome ? "nome-error" : undefined}
-          className={`${inputBase} ${errors.nome ? "border-red-500" : "border-gray-200"}`}
+          className={`${inputBase} ${errors.nome ? "border-error" : "border-border-input"}`}
         />
         {errors.nome && (
-          <p id="nome-error" className="mt-1 text-sm text-red-500">{errors.nome}</p>
+          <p id="nome-error" role="alert" className="mt-1 text-sm text-error-on-dark">
+            {errors.nome}
+          </p>
         )}
       </div>
 
@@ -126,17 +140,24 @@ export default function LeadForm() {
         </label>
         <input
           id="email"
+          ref={(node) => {
+            fieldRefs.current.email = node;
+          }}
           name="email"
           type="email"
+          autoComplete="email"
+          required
           placeholder="Seu melhor e-mail"
           value={formData.email}
           onChange={handleChange}
           aria-invalid={Boolean(errors.email)}
           aria-describedby={errors.email ? "email-error" : undefined}
-          className={`${inputBase} ${errors.email ? "border-red-500" : "border-gray-200"}`}
+          className={`${inputBase} ${errors.email ? "border-error" : "border-border-input"}`}
         />
         {errors.email && (
-          <p id="email-error" className="mt-1 text-sm text-red-500">{errors.email}</p>
+          <p id="email-error" role="alert" className="mt-1 text-sm text-error-on-dark">
+            {errors.email}
+          </p>
         )}
       </div>
 
@@ -145,9 +166,9 @@ export default function LeadForm() {
           Telefone
         </label>
         <div
-          className={`flex items-center bg-gray-50 border rounded-xl transition-all
-            focus-within:ring-2 focus-within:ring-orange-500/20 focus-within:border-orange-500
-            ${errors.telefone ? "border-red-500" : "border-gray-200"}`}
+          className={`flex items-center rounded-xl border bg-surface-input transition-all
+            focus-within:border-brand-gold focus-within:ring-2 focus-within:ring-brand-gold/30
+            ${errors.telefone ? "border-error" : "border-border-input"}`}
         >
           <button
             type="button"
@@ -155,8 +176,7 @@ export default function LeadForm() {
             aria-label={`Selecionar país. Atual: ${selectedCountry.name} ${selectedCountry.ddi}`}
             aria-expanded={isDropdownOpen}
             aria-controls="country-options"
-            className="flex items-center gap-1.5 px-3 py-3 text-gray-700 text-sm shrink-0
-              hover:bg-gray-100 rounded-l-xl transition-colors focus:outline-none border-r border-gray-200"
+            className="flex min-h-12 shrink-0 items-center gap-1.5 rounded-l-xl border-r border-border-input px-3 py-3 text-sm text-text-secondary transition-colors hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-brand-gold"
             title="Selecionar país"
           >
             <span className="text-base leading-none">{selectedCountry.flag}</span>
@@ -166,16 +186,20 @@ export default function LeadForm() {
 
           <input
             id="telefone"
+            ref={(node) => {
+              fieldRefs.current.telefone = node;
+            }}
             name="telefone"
             type="tel"
             inputMode="tel"
+            required
             placeholder={selectedCountry.code === "BR" ? "WhatsApp com DDD" : "Número de telefone"}
             value={formData.telefone}
             onChange={handleChange}
             autoComplete="tel-national"
             aria-invalid={Boolean(errors.telefone)}
             aria-describedby={errors.telefone ? "telefone-error" : undefined}
-            className="flex-1 bg-transparent px-3 py-3 text-gray-900 placeholder:text-gray-400 focus:outline-none text-sm rounded-r-xl"
+            className="min-h-12 min-w-0 flex-1 rounded-r-xl bg-transparent px-3 py-3 text-base text-text-primary placeholder:text-text-secondary focus:outline-none"
           />
         </div>
 
@@ -186,8 +210,8 @@ export default function LeadForm() {
                 key={country.code}
                 type="button"
                 onClick={() => handleCountrySelect(country)}
-                className={`w-full flex items-center justify-between px-3.5 py-2.5 text-sm hover:bg-[#fff7e6] transition-colors ${
-                  selectedCountry.code === country.code ? "bg-[#fff7e6] font-semibold text-[#8a5600]" : "text-gray-900"
+                className={`flex min-h-11 w-full items-center justify-between px-3.5 py-2.5 text-sm transition-colors hover:bg-brand-gold-soft ${
+                  selectedCountry.code === country.code ? "bg-brand-gold-soft font-semibold text-brand-gold-ink" : "text-text-primary"
                 }`}
               >
                 <div className="flex items-center gap-2.5">
@@ -201,16 +225,16 @@ export default function LeadForm() {
         )}
 
         {errors.telefone && (
-          <p id="telefone-error" className="mt-1 text-sm text-red-500">{errors.telefone}</p>
+          <p id="telefone-error" role="alert" className="mt-1 text-sm text-error-on-dark">
+            {errors.telefone}
+          </p>
         )}
       </div>
 
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full px-8 py-4 bg-[#ffb800] hover:bg-[#e6a600] text-[#0a0a0a] font-bold rounded-2xl text-base
-          transition-all duration-200 shadow-xl shadow-amber-500/30 hover:shadow-amber-500/50 hover:-translate-y-0.5
-          group flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+        className="group flex min-h-14 w-full items-center justify-center gap-2 whitespace-nowrap rounded-2xl bg-brand-gold px-4 py-4 text-sm font-bold text-text-primary shadow-xl shadow-amber-500/30 transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-gold-dark hover:shadow-amber-500/50 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-gold disabled:cursor-not-allowed disabled:opacity-70 sm:px-8 sm:text-base"
       >
         {isSubmitting ? (
           <>
@@ -225,7 +249,7 @@ export default function LeadForm() {
         )}
       </button>
 
-      <p className="text-xs text-center text-gray-400">
+      <p className="text-center text-xs text-gray-400">
         Seus dados estão seguros. Não enviamos spam.
       </p>
     </form>

@@ -1,17 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;900&display=swap');
 @import "tailwindcss";
 
 @theme {
   --color-brand-gold: #ffb800;
   --color-brand-gold-dark: #e6a600;
+  --color-brand-gold-soft: #fff7e6;
+  --color-brand-gold-ink: #7a4e00;
   --color-brand-orange: #ff7e4a;
+  --color-surface-dark: #212121;
+  --color-surface-input: #f9fafb;
   --color-text-primary: #0a0a0a;
   --color-text-secondary: #6b7280;
   --color-text-muted: #9ca3af;
+  --color-text-on-dark: #d1d5db;
+  --color-text-subtle-on-dark: #9ca3af;
+  --color-border-input: #d1d5db;
   --color-success: #10b981;
   --color-error: #ef4444;
+  --color-error-on-dark: #f87171;
 
-  --font-family-inter: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+  --font-brand: "Archivo", system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, sans-serif;
 }
 
@@ -24,7 +32,7 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100svh;
-  font-family: var(--font-family-inter);
+  font-family: var(--font-brand);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -36,8 +44,8 @@ body {
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0 1000px #f9fafb inset;
-  box-shadow: 0 0 0 1000px #f9fafb inset;
+  -webkit-box-shadow: 0 0 0 1000px var(--color-surface-input) inset;
+  box-shadow: 0 0 0 1000px var(--color-surface-input) inset;
 }
 
 .hero-surface::before {
@@ -53,7 +61,7 @@ input:-webkit-autofill:focus {
 }
 
 .legal-content h2 {
-  color: #fff;
+  color: white;
   font-size: 1.375rem;
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -61,7 +69,7 @@ input:-webkit-autofill:focus {
 
 .legal-content p,
 .legal-content li {
-  color: #d1d5db;
+  color: var(--color-text-on-dark);
   font-size: 1rem;
   line-height: 1.8;
 }
@@ -123,7 +131,6 @@ input:-webkit-autofill:focus {
   animation:
     platform-arrival 700ms cubic-bezier(0.16, 1, 0.3, 1) var(--arrival-delay) both,
     platform-float var(--float-duration) ease-in-out var(--float-delay) infinite alternate;
-  will-change: transform;
 }
 
 .floating-platform__tile {
@@ -134,15 +141,11 @@ input:-webkit-autofill:focus {
   padding: 1.2rem;
   border: 1px solid rgba(255, 255, 255, 0.45);
   border-radius: 1.35rem;
-  background: rgba(240, 242, 245, 0.72);
+  background: rgba(240, 242, 245, 0.92);
   box-shadow:
     0 1.25rem 3rem rgba(0, 0, 0, 0.35),
     inset 0 1px 1px rgba(255, 255, 255, 0.8),
     inset 0 -1px 1px rgba(0, 0, 0, 0.05);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  animation: platform-card-drift 4.8s ease-in-out var(--float-delay) infinite alternate;
-  will-change: transform, box-shadow;
 }
 
 .floating-platform__logo {
@@ -244,13 +247,15 @@ input:-webkit-autofill:focus {
   }
 
   .floating-platform--taboola {
-    top: 18rem;
+    top: auto;
+    bottom: 12rem;
     right: 0.75rem;
     left: auto;
   }
 
   .floating-platform--newsbreak {
-    top: 18rem;
+    top: auto;
+    bottom: 12rem;
     left: 0.75rem;
     right: auto;
   }
@@ -294,28 +299,11 @@ input:-webkit-autofill:focus {
   }
 }
 
-@keyframes platform-card-drift {
-  from {
-    transform: translateY(-0.2rem) scale(0.99);
-    box-shadow:
-      0 1rem 2.5rem rgba(0, 0, 0, 0.3),
-      inset 0 1px 1px rgba(255, 255, 255, 0.8),
-      inset 0 -1px 1px rgba(0, 0, 0, 0.05);
-  }
-  to {
-    transform: translateY(0.25rem) scale(1.01);
-    box-shadow:
-      0 1.5rem 3.25rem rgba(0, 0, 0, 0.45),
-      inset 0 1px 1px rgba(255, 255, 255, 0.9),
-      inset 0 -1px 1px rgba(0, 0, 0, 0.08);
-  }
-}
-
 .portrait-partnership {
   top: 0;
-  left: -12.5%;
-  width: 125%;
-  height: 125%;
+  left: -45%;
+  width: 190%;
+  height: 190%;
   max-width: none;
 }
 
@@ -380,10 +368,6 @@ input:-webkit-autofill:focus {
 }
 
 @media (max-width: 1023px) {
-  .hero-copy {
-    margin-top: 2rem;
-  }
-
   .floating-platform--taboola .floating-platform__tile,
   .floating-platform--newsbreak .floating-platform__tile {
     width: 4rem;
@@ -398,7 +382,4 @@ input:-webkit-autofill:focus {
     transform: rotate(0deg);
   }
 
-  .floating-platform__tile {
-    animation: none;
-  }
 }

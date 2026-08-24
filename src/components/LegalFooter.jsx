@@ -1,8 +1,8 @@
 export default function LegalFooter() {
   return (
-    <footer className="mt-5 flex w-full max-w-md flex-col gap-4 border-t border-white/10 pt-5 text-[0.6875rem] leading-relaxed text-gray-400 sm:flex-row sm:items-start sm:justify-between">
+    <footer className="mt-5 flex w-full max-w-md flex-col gap-4 border-t border-white/10 pt-5 text-[0.8125rem] leading-relaxed text-text-subtle-on-dark sm:flex-row sm:items-start sm:justify-between">
       <div className="max-w-[17rem]">
-        <p className="font-semibold text-gray-300">
+        <p className="font-semibold text-text-on-dark">
           Ratoeira Ads — CNPJ: 55.824.986/0001-06
         </p>
         <address className="mt-1 not-italic">
@@ -12,17 +12,17 @@ export default function LegalFooter() {
       </div>
 
       <nav
-        className="flex shrink-0 flex-col items-start gap-2"
+        className="flex shrink-0 flex-col items-start"
         aria-label="Links legais"
       >
         <a
-          className="transition-colors hover:text-[#FFB800] focus-visible:text-[#FFB800] focus-visible:outline-none"
+          className="inline-flex min-h-11 items-center transition-colors hover:text-brand-gold focus-visible:text-brand-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
           href="#/politica-de-privacidade"
         >
           Política de privacidade
         </a>
         <a
-          className="transition-colors hover:text-[#FFB800] focus-visible:text-[#FFB800] focus-visible:outline-none"
+          className="inline-flex min-h-11 items-center transition-colors hover:text-brand-gold focus-visible:text-brand-gold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
           href="#/termos-de-uso"
         >
           Termos de uso
