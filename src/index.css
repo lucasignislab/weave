@@ -218,7 +218,9 @@ input:-webkit-autofill:focus {
 @media (max-width: 1023px) {
   .page-brand-logo {
     top: 1rem;
+    left: 50%;
     width: 8.5rem;
+    transform: translateX(-50%);
   }
 
   .floating-platform {
