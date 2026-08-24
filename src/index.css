@@ -324,6 +324,10 @@ input:-webkit-autofill:focus {
 }
 
 @media (min-width: 1024px) {
+  .portrait-stage::after {
+    display: none;
+  }
+
   .floating-platform {
     right: auto;
     bottom: auto;
