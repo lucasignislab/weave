@@ -112,7 +112,7 @@ input:-webkit-autofill:focus {
 .floating-platforms {
   position: absolute;
   inset: 0;
-  z-index: 5;
+  z-index: 25;
   overflow: hidden;
   pointer-events: none;
 }
@@ -219,7 +219,6 @@ input:-webkit-autofill:focus {
   }
 
   .floating-platform {
-    top: 30rem;
     right: auto;
     bottom: auto;
     --float-x: 0.2rem;
@@ -227,24 +226,33 @@ input:-webkit-autofill:focus {
   }
 
   .floating-platform--meta {
-    left: 4%;
+    top: 1rem;
+    right: 7rem;
+    left: auto;
   }
 
   .floating-platform--tiktok {
-    left: 20%;
+    top: 1rem;
+    right: 4rem;
+    left: auto;
   }
 
   .floating-platform--google {
-    left: 36%;
+    top: 1rem;
+    right: 1rem;
+    left: auto;
   }
 
   .floating-platform--taboola {
-    right: 4%;
+    top: 18rem;
+    right: 0.75rem;
     left: auto;
   }
 
   .floating-platform--newsbreak {
-    left: 52%;
+    top: 18rem;
+    left: 0.75rem;
+    right: auto;
   }
 
   .floating-platform__tile {
@@ -315,29 +323,34 @@ input:-webkit-autofill:focus {
   .floating-platform {
     right: auto;
     bottom: auto;
-    top: 1rem;
+    top: auto;
     --float-x: 0.25rem;
     --float-y: 0.35rem;
   }
 
   .floating-platform--meta {
-    left: 47%;
+    top: 1rem;
+    left: 48%;
   }
 
   .floating-platform--tiktok {
-    left: 56%;
+    top: 1rem;
+    left: 61%;
   }
 
   .floating-platform--google {
-    left: 65%;
-  }
-
-  .floating-platform--newsbreak {
+    top: 1rem;
     left: 74%;
   }
 
+  .floating-platform--newsbreak {
+    top: clamp(32rem, 78vh, 48rem);
+    left: 47%;
+  }
+
   .floating-platform--taboola {
-    right: 2%;
+    top: clamp(32rem, 78vh, 48rem);
+    right: 2rem;
     left: auto;
   }
 
