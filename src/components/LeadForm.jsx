@@ -2,7 +2,8 @@ import { useState, useRef, useEffect } from "react";
 import { ArrowRight, Loader2, ChevronDown } from "lucide-react";
 import { isPlausiblePhoneNumber, normalizePhoneInput } from "../lib/phone";
 
-const CHECKOUT_URL = "#checkout";
+const CHECKOUT_URL =
+  "https://chat.whatsapp.com/BQCxIjwb3I0IjGvTOPmBuz?src=vSt108737e4d4df454d87501c1e2947f084&sck=vSt108737e4d4df454d87501c1e2947f084&utm_medium=vSt108737e4d4df454d87501c1e2947f084&utm_campaign=vSt108737e4d4df454d87501c1e2947f084&utm_content=vSt108737e4d4df454d87501c1e2947f084";
 
 const COUNTRIES = [
   { code: "BR", name: "Brasil", ddi: "+55", flag: "🇧🇷" },
