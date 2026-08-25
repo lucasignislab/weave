@@ -191,6 +191,18 @@ input:-webkit-autofill:focus {
   --rotate-to: -4deg;
 }
 
+.floating-platform--mgid {
+  top: 44%;
+  left: 1%;
+  --arrival-delay: 280ms;
+  --float-delay: -4.5s;
+  --float-duration: 11s;
+  --float-x: 0.7rem;
+  --float-y: -0.6rem;
+  --rotate-from: -4deg;
+  --rotate-to: 5deg;
+}
+
 .floating-platform--taboola {
   right: 3%;
   bottom: 8%;
@@ -248,6 +260,11 @@ input:-webkit-autofill:focus {
     left: auto;
   }
 
+  .floating-platform--mgid {
+    top: 19.5rem;
+    left: 0.75rem;
+  }
+
   .floating-platform--taboola {
     top: 13.5rem;
     bottom: auto;
@@ -268,6 +285,7 @@ input:-webkit-autofill:focus {
     padding: 0.55rem;
   }
 
+  .floating-platform--mgid .floating-platform__tile,
   .floating-platform--taboola .floating-platform__tile,
   .floating-platform--newsbreak .floating-platform__tile {
     width: 4rem;
@@ -275,6 +293,7 @@ input:-webkit-autofill:focus {
   }
 }
 
+.floating-platform--mgid .floating-platform__tile,
 .floating-platform--taboola .floating-platform__tile,
 .floating-platform--newsbreak .floating-platform__tile {
   width: 11.25rem;
@@ -330,6 +349,10 @@ input:-webkit-autofill:focus {
     display: none;
   }
 
+  .floating-platforms {
+    overflow: visible;
+  }
+
   .floating-platform {
     right: auto;
     bottom: auto;
@@ -354,6 +377,11 @@ input:-webkit-autofill:focus {
     left: auto;
   }
 
+  .floating-platform--mgid {
+    top: clamp(17rem, 45vh, 27rem);
+    left: -7rem;
+  }
+
   .floating-platform--newsbreak {
     top: clamp(32rem, 78vh, 48rem);
     left: 0;
@@ -371,6 +399,7 @@ input:-webkit-autofill:focus {
     padding: 0.85rem;
   }
 
+  .floating-platform--mgid .floating-platform__tile,
   .floating-platform--taboola .floating-platform__tile,
   .floating-platform--newsbreak .floating-platform__tile {
     width: 7rem;
@@ -391,6 +420,7 @@ input:-webkit-autofill:focus {
 }
 
 @media (max-width: 1023px) {
+  .floating-platform--mgid .floating-platform__tile,
   .floating-platform--taboola .floating-platform__tile,
   .floating-platform--newsbreak .floating-platform__tile {
     width: 4rem;

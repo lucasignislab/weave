@@ -1,5 +1,6 @@
 import GoogleAdsLogo from "../assets/platforms/google-ads.svg";
 import MetaAdsLogo from "../assets/platforms/meta.svg";
+import MgidLogo from "../assets/platforms/mgid.svg";
 import NewsBreakLogo from "../assets/platforms/newsbreak.png";
 import TaboolaLogo from "../assets/platforms/taboola.webp";
 import TikTokLogo from "../assets/platforms/tiktok.svg";
@@ -19,6 +20,11 @@ const platforms = [
     name: "Google Ads",
     logo: GoogleAdsLogo,
     position: "floating-platform--google",
+  },
+  {
+    name: "MGID",
+    logo: MgidLogo,
+    position: "floating-platform--mgid",
   },
   {
     name: "Taboola",
