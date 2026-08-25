@@ -5,6 +5,21 @@ import { isPlausiblePhoneNumber, normalizePhoneInput } from "../lib/phone";
 const CHECKOUT_URL =
   "https://chat.whatsapp.com/BQCxIjwb3I0IjGvTOPmBuz?src=vSt108737e4d4df454d87501c1e2947f084&sck=vSt108737e4d4df454d87501c1e2947f084&utm_medium=vSt108737e4d4df454d87501c1e2947f084&utm_campaign=vSt108737e4d4df454d87501c1e2947f084&utm_content=vSt108737e4d4df454d87501c1e2947f084";
 const WEBHOOK_URL = import.meta.env.VITE_WEBHOOK_URL;
+const UTM_KEYS = [
+  "utm_source",
+  "utm_medium",
+  "utm_campaign",
+  "utm_term",
+  "utm_content",
+];
+
+const readUtmParameters = () => {
+  const searchParams = new URLSearchParams(window.location.search);
+
+  return Object.fromEntries(
+    UTM_KEYS.map((key) => [key, searchParams.get(key)?.trim() ?? ""]),
+  );
+};
 
 const COUNTRIES = [
   { code: "BR", name: "Brasil", ddi: "+55", flag: "🇧🇷" },
@@ -27,6 +42,7 @@ const COUNTRIES = [
 ];
 
 export default function LeadForm() {
+  const [utmParameters] = useState(readUtmParameters);
   const [formData, setFormData] = useState({
     nome: "",
     email: "",
@@ -108,6 +124,7 @@ export default function LeadForm() {
       pais: selectedCountry.name,
       codigoPais: selectedCountry.code,
       ddi: selectedCountry.ddi,
+      ...utmParameters,
     };
 
     try {
