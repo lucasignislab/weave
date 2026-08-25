@@ -378,8 +378,8 @@ input:-webkit-autofill:focus {
   }
 
   .floating-platform--mgid {
-    top: clamp(17rem, 45vh, 27rem);
-    left: -7rem;
+    top: clamp(23rem, 45vh, 27rem);
+    left: -1.5rem;
   }
 
   .floating-platform--newsbreak {
