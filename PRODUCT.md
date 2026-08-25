@@ -12,11 +12,11 @@ Afiliados que usam o Ratoeira Ads e procuram melhorar seus resultados em campanh
 
 ## Product Purpose
 
-Apresentar a parceria entre Ratoeira Ads e a comunidade Weave e direcionar afiliados interessados para a próxima etapa de conversão.
+Apresentar as aulas de Dairo Junior em parceria com a Ratoeira Ads e direcionar afiliados interessados para a próxima etapa de conversão.
 
 ## Positioning
 
-O Ratoeira Ads é apresentado como o maior software de rastreamento do Brasil, em parceria com a Weave, uma comunidade de referência para afiliados.
+O Ratoeira Ads é apresentado como o maior software de rastreamento do Brasil, em parceria com Dairo Junior para uma série de aulas práticas.
 
 ## Operating Context
 
@@ -30,7 +30,7 @@ A primeira experiência é uma landing page de captação: o visitante fornece n
 
 ## Brand Commitments
 
-- Nomes a preservar: Ratoeira Ads e Weave.
+- Nomes a preservar: Ratoeira Ads e Dairo Junior.
 - A comunicação deve atender afiliados e manter as afirmações de liderança e referência fornecidas pelo produto.
 - Referência visual vinculante: `/Users/lucascoelho/Desktop/ratoeirahub/DESIGN_SYSTEM.md`.
 
